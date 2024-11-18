@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Name: Gephi Git Import
+OpenIDE-Module-Short-Description: Display the low-level content of a git repository. No practical utility expected.
+OpenIDE-Module-Long-Description: Use it at your own risk.
+OpenIDE-Module-Display-Category: Generator

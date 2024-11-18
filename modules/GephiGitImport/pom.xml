@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>gephi-plugin-parent</artifactId>
+        <groupId>org.gephi</groupId>
+        <version>0.10.0</version>
+    </parent>
+
+    <groupId>io.github.erwandemairy</groupId>
+    <artifactId>gephi-gitimport</artifactId>
+    <version>0.0.2</version>
+    <packaging>nbm</packaging>
+
+    <name>Gephi Git Import</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>6.8.0.202311291450-r</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>desktop-project</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>graph-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>io-importer-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>io-generator-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>project-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>utils-longtask</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.netbeans.utilities</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+<!--                <version>4.7</version>-->
+                <configuration>
+                    <licenseName>MIT</licenseName>
+                    <author>Erwan Demairy</author>
+                    <authorEmail>erwan.demairy@inria.fr</authorEmail>
+                    <authorUrl></authorUrl>
+                    <sourceCodeUrl>https://github.com/ErwanDemairy/gephi-gitimport</sourceCodeUrl>
+                    <publicPackages>
+                        <!-- Insert public packages -->
+                    </publicPackages>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Snapshot Repositories (only needed if developing against a SNAPSHOT version) -->
+    <repositories>
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>
+
+

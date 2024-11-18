@@ -12,6 +12,7 @@
     <!-- List of modules -->
     <modules>
         <!-- Add here the paths of all modules (e.g. <module>modules/MyModule</module>) -->
+        <module>modules/GephiGitImport</module>
     </modules>
     
     <!-- Properties -->
@@ -85,6 +86,7 @@
                     <groupId>org.apache.netbeans.utilities</groupId>
                     <artifactId>nbm-maven-plugin</artifactId>
                     <version>4.5</version>
+<!--                    <version>4.7</version>-->
                     <extensions>true</extensions>
                 </plugin>
                 <plugin>
