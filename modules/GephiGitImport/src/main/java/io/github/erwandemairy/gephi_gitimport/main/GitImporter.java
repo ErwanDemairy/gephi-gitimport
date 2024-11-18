@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 
 @ServiceProvider(service = Generator.class)
 public class GitImporter implements Generator {
+    protected File repoDir;
     protected boolean cancel = false;
     protected ProgressTicket progress;
 
@@ -33,7 +34,7 @@ public class GitImporter implements Generator {
     public void generate(ContainerLoader containerLoader) {
         this.container = containerLoader;
 
-        File repoDir = new File("/Users/edemairy/tmp/update-semanticwebimport");
+//        File repoDir = new File("/Users/edemairy/tmp/update-semanticwebimport");
         try (Repository repository = Git.open(repoDir).getRepository()) {
             String branch = repository.getBranch();
             LOGGER.info("Current branch: " + branch);
@@ -51,9 +52,11 @@ public class GitImporter implements Generator {
                     LOGGER.fine("---------------------------------------------------");
 
                     NodeDraft commitNode = container.factory().newNodeDraft(commit.getName());
+                    commitNode.setValue("Type", "commit");
                     container.addNode(commitNode);
 
                     NodeDraft authorNode = container.factory().newNodeDraft(commit.getAuthorIdent().getName());
+                    authorNode.setValue("Type", "author");
                     container.addNode(authorNode);
 
                     EdgeDraft authorEdge = container.factory().newEdgeDraft();
@@ -63,6 +66,7 @@ public class GitImporter implements Generator {
                     container.addEdge(authorEdge);
 
                     NodeDraft dateNode = container.factory().newNodeDraft(commit.getCommitterIdent().getWhen().toString());
+                    dateNode.setValue("Type", "date");
                     container.addNode(dateNode);
 
                     EdgeDraft dateEdge = container.factory().newEdgeDraft();
@@ -72,6 +76,7 @@ public class GitImporter implements Generator {
                     container.addEdge(dateEdge);
 
                     NodeDraft messageNode = container.factory().newNodeDraft(commit.getFullMessage());
+                    messageNode.setValue("Type", "message");
                     container.addNode(messageNode);
 
                     EdgeDraft messageEdge = container.factory().newEdgeDraft();
@@ -82,6 +87,7 @@ public class GitImporter implements Generator {
 
                     for (var parent : commit.getParents()) {
                         NodeDraft parentNode = container.factory().newNodeDraft(parent.getName());
+                        parentNode.setValue("Type", "commit");
                         EdgeDraft parentEdge = container.factory().newEdgeDraft();
                         parentEdge.setLabel("parent");
                         parentEdge.setSource(commitNode);
@@ -124,7 +130,7 @@ public class GitImporter implements Generator {
 
     @Override
     public GeneratorUI getUI() {
-        return null;
+        return new GitImporterUI();
     }
 
     @Override
@@ -136,5 +142,9 @@ public class GitImporter implements Generator {
     @Override
     public void setProgressTicket(ProgressTicket progressTicket) {
         this.progress = progressTicket;
+    }
+
+    public void setDirectory(String directory) {
+        this.repoDir = new File(directory);
     }
 }
